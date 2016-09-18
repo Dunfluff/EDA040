@@ -26,6 +26,7 @@ public class AlarmClock {
 		output = o;
 		signal = input.getSemaphoreInstance();
 		man = new Manager(input, output);
+		start();
 	}
 	
 
@@ -41,7 +42,7 @@ public class AlarmClock {
 	 * Create thread objects, and start threads
 	 */
 	public void start() {
-		new TThread(man).start();
+		t = new TThread(man).start();
 		new BThread(input, man).start();
 	}
 	

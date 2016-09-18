@@ -8,20 +8,19 @@ import se.lth.cs.realtime.semaphore.Semaphore;
 //borde kunna göra alla set metoder och larm kollar i denna, och därmed göra den icke publik. Borde fortfarande vara statisk.
 //behöver därmed innehålla input och output vid start.
 public class Manager {
-	private Semaphore semaphore;
-	private boolean alive;
+	private Semaphore semaphore = new MutexSem();
+	private boolean alive = true;
 	private int time, alarmTime, alarmCount;
 	private ClockInput input;
 	private ClockOutput output;
 
 	public Manager(ClockInput i, ClockOutput o) {
-		alive = true;
 		input = i;
 		output = o;
 		time = 0;
 		alarmTime = 0;
 		alarmCount = 0;
-		semaphore = new MutexSem();
+
 	}
 	
     private void alarm() {

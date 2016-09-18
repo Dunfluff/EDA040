@@ -8,7 +8,6 @@ public class TThread extends Thread {
 
 	private Manager man;
 	private ScheduledExecutorService exec = Executors.newSingleThreadScheduledExecutor();
-	private int test = 0;
 
 	public TThread(Manager man) {
 		this.man = man;
@@ -22,7 +21,7 @@ public class TThread extends Thread {
 				if(!man.isAlive())
 					return;
 				man.tick();
-				System.out.println(test+=1);
+				System.out.println("test");
 			}
 		}, 0, 1, TimeUnit.SECONDS);
 	}

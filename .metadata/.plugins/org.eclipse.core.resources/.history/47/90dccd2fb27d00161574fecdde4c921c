@@ -14,7 +14,6 @@ public class AlarmClock {
 	private static ClockOutput	output;
 	private static Semaphore	signal; 
 	private Manager man;
-	private TThread t;
 
 	/**
 	 * Create main application and bind attributes to device drivers.
@@ -26,6 +25,7 @@ public class AlarmClock {
 		output = o;
 		signal = input.getSemaphoreInstance();
 		man = new Manager(input, output);
+		start();
 	}
 	
 
@@ -41,8 +41,7 @@ public class AlarmClock {
 	 * Create thread objects, and start threads
 	 */
 	public void start() {
-		new TThread(man).start();
-		new BThread(input, man).start();
+
 	}
 	
 //	class InputOutputTest implements Runnable {

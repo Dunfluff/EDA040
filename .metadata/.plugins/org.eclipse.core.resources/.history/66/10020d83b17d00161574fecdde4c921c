@@ -12,9 +12,7 @@ public class AlarmClock {
 
 	private static ClockInput	input;
 	private static ClockOutput	output;
-	private static Semaphore	signal; 
 	private Manager man;
-	private TThread t;
 
 	/**
 	 * Create main application and bind attributes to device drivers.
@@ -24,8 +22,8 @@ public class AlarmClock {
 	public AlarmClock(ClockInput i, ClockOutput o) {
 		input = i;
 		output = o;
-		signal = input.getSemaphoreInstance();
 		man = new Manager(input, output);
+		start();
 	}
 	
 

@@ -9,19 +9,19 @@ import se.lth.cs.realtime.semaphore.Semaphore;
 //behöver därmed innehålla input och output vid start.
 public class Manager {
 	private Semaphore semaphore;
-	private boolean alive;
+	private boolean alive = true;
 	private int time, alarmTime, alarmCount;
 	private ClockInput input;
 	private ClockOutput output;
 
 	public Manager(ClockInput i, ClockOutput o) {
-		alive = true;
 		input = i;
 		output = o;
 		time = 0;
 		alarmTime = 0;
 		alarmCount = 0;
 		semaphore = new MutexSem();
+
 	}
 	
     private void alarm() {

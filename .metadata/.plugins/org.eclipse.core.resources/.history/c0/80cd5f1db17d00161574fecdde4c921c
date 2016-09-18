@@ -22,6 +22,7 @@ public class Manager {
 		alarmTime = 0;
 		alarmCount = 0;
 		semaphore = new MutexSem();
+
 	}
 	
     private void alarm() {
