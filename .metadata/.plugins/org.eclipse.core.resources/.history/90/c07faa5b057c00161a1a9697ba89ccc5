@@ -1,0 +1,19 @@
+package done;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread{
+	Semaphore sem;
+	String string;
+	public TThread(Semaphore sem){
+		this.sem = sem;
+	}
+	public void addSecond(){
+		
+	}
+	public void run(){
+		sem.take();
+		
+	}
+
+}

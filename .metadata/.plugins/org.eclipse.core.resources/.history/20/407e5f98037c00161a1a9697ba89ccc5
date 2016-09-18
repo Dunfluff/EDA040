@@ -1,0 +1,10 @@
+package done;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread{
+	public TThread(Semaphore sem){
+		
+	}
+
+}
