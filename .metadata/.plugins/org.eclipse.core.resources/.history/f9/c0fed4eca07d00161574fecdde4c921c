@@ -1,0 +1,26 @@
+package done;
+
+
+//borde kunna göra alla set metoder och larm kollar i denna, och därmed göra den icke publik. Borde fortfarande vara statisk.
+//behöver därmed innehålla input och output vid start.
+public class Manager {
+	private boolean alive;
+	private int time, alarmTime, alarmCount;
+	private ClockInput i;
+	private ClockOutput o;
+	
+	public Manager(ClockInput input, ClockOutput output){
+		alive = true;
+		i = input;
+		o = output;
+		time = 0;
+		alarmTime = 0;
+		alarmCount = 0;
+		
+	}
+
+	public void tick() {
+		// TODO Auto-generated method stub
+		
+	}
+}

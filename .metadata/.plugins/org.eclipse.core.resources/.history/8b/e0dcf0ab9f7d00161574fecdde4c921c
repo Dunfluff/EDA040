@@ -1,0 +1,33 @@
+package done;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread{
+	Semaphore sem;
+	String string;
+	Manager man;
+
+	public TThread(Semaphore sem, Manager man){
+		this.sem = sem;
+		this.man = man;
+	}
+	public void addSecond(){
+		sem.take();
+		man.addSecond();
+		sem.give();
+	}
+	public void run(){
+		while(true){
+			sem.take();
+			addSecond();
+			sem.give();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}

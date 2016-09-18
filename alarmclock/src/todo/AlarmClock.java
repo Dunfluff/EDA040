@@ -10,11 +10,10 @@ import se.lth.cs.realtime.semaphore.Semaphore;
  */
 public class AlarmClock {
 
-	private ClockInput	input;
-	private ClockOutput	output;
-	private Semaphore	signal; 
-	private BThread bThread;
-	public static String time;
+	private static ClockInput	input;
+	private static ClockOutput	output;
+	private static Semaphore	signal; 
+	private Manager man;
 
 	/**
 	 * Create main application and bind attributes to device drivers.
@@ -25,6 +24,8 @@ public class AlarmClock {
 		input = i;
 		output = o;
 		signal = input.getSemaphoreInstance();
+		man = new Manager(input, output);
+		start();
 	}
 	
 
@@ -32,7 +33,7 @@ public class AlarmClock {
 	 * Tell threads to terminate and wait until they are dead.
 	 */
 	public void terminate() {
-		// Do something more clever here...
+		man.kill();
 		output.console("AlarmClock exit.");
 	}
 	
@@ -40,36 +41,27 @@ public class AlarmClock {
 	 * Create thread objects, and start threads
 	 */
 	public void start() {
-		// Delete/replace the following test/demo code;
-		// make something happen by exercising the IO:
-
-		// Create thread objects here...
-		//Thread removeMeFromApplication = new Thread(new InputOutputTest());
-		
-		// Create threads of execution by calling start...
-		//removeMeFromApplication.start();
-		
-		bThread = new BThread(signal, time);
-		bThread.start();
+		new TThread(man).start();
+		new BThread(input, man).start();
 	}
 	
-	class InputOutputTest implements Runnable {
-		public void run() {
-			long curr; int time, mode; boolean flag;
-			output.console("Click on GUI to obtain key presses!");
-			while (!Thread.currentThread().isInterrupted()) {
-				curr = System.currentTimeMillis();
-				time = input.getValue();
-				flag = input.getAlarmFlag();
-				mode = input.getChoice();
-				output.doAlarm();
-				output.console(curr, time, flag, mode);
-				if (time == 120000) break; // Swe: Bryter för middag
-				signal.take();
-			}
-			output.console("IO-test terminated #");
-		}
-
-	}
+//	class InputOutputTest implements Runnable {
+//		public void run() {
+//			long curr; int time, mode; boolean flag;
+//			output.console("Click on GUI to obtain key presses!");
+//			while (!Thread.currentThread().isInterrupted()) {
+//				curr = System.currentTimeMillis();
+//				time = input.getValue();
+//				flag = input.getAlarmFlag();
+//				mode = input.getChoice();
+//				output.doAlarm();
+//				output.console(curr, time, flag, mode);
+//				if (time == 120000) break; // Swe: Bryter för middag
+//				signal.take();
+//			}
+//			output.console("IO-test terminated #");
+//		}
+//
+//	}
 	
 }

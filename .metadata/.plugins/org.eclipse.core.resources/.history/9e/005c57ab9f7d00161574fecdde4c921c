@@ -1,0 +1,21 @@
+package done;
+
+
+//borde kunna göra alla set metoder och larm kollar i denna, och därmed göra den icke publik. Borde fortfarande vara statisk.
+//behöver därmed innehålla input och output vid start.
+public class Manager {
+	private String time;
+	private String alarmTime;
+	private Boolean alarm;
+	private ClockInput input;
+	private ClockOutput output;
+	
+	public Manager(ClockInput input, ClockOutput output){
+		
+	}
+
+	public void addSecond() {
+		// TODO Auto-generated method stub
+		
+	}
+}

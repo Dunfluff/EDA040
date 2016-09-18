@@ -1,0 +1,36 @@
+package todo;
+
+import se.lth.cs.realtime.RTInterrupted;
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread {
+
+	private long waitTime = System.currentTimeMillis();
+	private Manager man;
+
+	public TThread(Manager man) {
+		this.man = man;
+	}
+
+	@Override
+	public void run() {
+			boolean one = true;
+	        long diff;
+
+	        while (man.isAlive()) {
+	            while ((diff = waitTime - System.currentTimeMillis()) > 0 && one) {
+	                try {
+	                	one = false;
+	                    Thread.sleep(diff);
+	                } catch (InterruptedException e) {
+	                    throw new RTInterrupted(e.toString());
+	                }
+	            }
+
+	            waitTime = waitTime + 1000 + diff;
+	            man.tick();
+	            one = true;
+	        }
+	    }
+
+}

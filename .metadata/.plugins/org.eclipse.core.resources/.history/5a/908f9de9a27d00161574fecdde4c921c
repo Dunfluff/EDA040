@@ -1,0 +1,32 @@
+package todo;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread {
+
+	private long waitTime;
+	private static Manager man;
+
+	public TThread(Manager man) {
+		waitTime = System.currentTimeMillis();
+		this.man = man;
+	}
+
+	public void run() {
+		
+		long diff;
+		while (true) {
+			diff = waitTime - System.currentTimeMillis();
+			if (diff > 0) {
+				try {
+					sleep(diff);
+				} catch (InterruptedException e) {
+
+				}
+				waitTime += 1000 + diff;
+				man.tick();
+			}
+		}
+	}
+
+}

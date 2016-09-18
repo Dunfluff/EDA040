@@ -1,0 +1,31 @@
+package done;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class TThread extends Thread {
+
+	private long time;
+	private static Manager man;
+
+	public TThread(Manager man) {
+		this.man = man;
+	}
+
+	public void run() {
+		time = System.currentTimeMillis();
+		long diff;
+		while (true) {
+			time += 1000;
+			diff = time - System.currentTimeMillis();
+			if (diff > 0) {
+				try {
+					sleep(diff);
+				} catch (InterruptedException e) {
+
+				}
+				man.tick();
+			}
+		}
+	}
+
+}
