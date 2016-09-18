@@ -22,6 +22,7 @@ public class TThread extends Thread {
 				if(!man.isAlive())
 					return;
 				man.tick();
+				System.out.println(test+=1);
 			}
 		}, 0, 1, TimeUnit.SECONDS);
 	}
