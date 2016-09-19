@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="C:/Users/Lars/Documents/GitHub/EDA040/ljrt/ljrt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Lars/Documents/GitHub/EDA040/alarmclock/resources/img.jar"/>
+	<classpathentry kind="lib" path="/h/d6/c/dat14lko/EDA040/EDA040/ljrt/ljrt.jar"/>
+	<classpathentry kind="lib" path="/h/d6/c/dat14lko/EDA040/EDA040/alarmclock/resources/img.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
