@@ -1,0 +1,9 @@
+package lift;
+
+public class LiftLift extends Thread {
+
+	public LiftLift(LiftMonitor monitor, LiftView liftView) {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

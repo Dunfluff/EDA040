@@ -1,0 +1,35 @@
+package lift;
+
+import java.util.Random;
+
+import se.lth.cs.realtime.semaphore.*;
+
+
+public class LiftPerson extends Thread {
+	int delay, here, dest;
+	Random rand;
+	private Semaphore semaphore;
+	
+	public LiftPerson(LiftMonitor monitor, ) {
+		delay = 1000*(( int )( Math.random ()*46.0)); // sleep need milliseconds
+		semaphore = monitor;
+		rand = new Random();
+		here = rand.nextInt(7);
+		do{
+			dest = rand.nextInt(7);
+		}while(dest == here);
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		semaphore.take();
+		level.drawLevel();
+		semaphore.give();
+	}
+}

@@ -1,0 +1,20 @@
+package lift;
+
+public class LiftLift extends Thread {
+		 private LiftMonitor monitor;
+		    private LiftView liftView;
+
+		    public LiftLift(LiftMonitor monitor, LiftView liftView) {
+		        this.monitor = monitor;
+		        this.liftView = liftView;
+		    }
+
+		    public void run() {
+		        int here = monitor.stop();
+
+		        while (true) {
+		            liftView.moveLift(here, monitor.move());
+		            here = monitor.stop();
+		        }
+		    }
+}

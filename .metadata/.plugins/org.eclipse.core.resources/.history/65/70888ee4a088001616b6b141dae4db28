@@ -1,0 +1,23 @@
+package lift;
+
+import se.lth.cs.realtime.RTInterrupted;
+
+public class PersonHandler extends Thread {
+	private LiftMonitor monitor;
+
+	public PersonHandler(LiftMonitor monitor) {
+		this.monitor = monitor;
+	}
+
+	@Override
+	public void run() {
+		while (monitor.isAlive()) {
+			try {
+				Thread.sleep(1000*(( int )( Math.random ()*46.0))); // sleep need milliseconds);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+}

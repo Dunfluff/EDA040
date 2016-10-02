@@ -1,0 +1,5 @@
+package lift;
+
+public class LiftLift extends Thread {
+	
+}

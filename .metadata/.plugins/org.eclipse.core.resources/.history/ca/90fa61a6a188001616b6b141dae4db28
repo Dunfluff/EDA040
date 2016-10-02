@@ -1,0 +1,5 @@
+package lift;
+
+public class LiftPerson extends Thread {
+	int delay = 1000*(( int )( Math.random ()*46.0)); // sleep need milliseconds
+}

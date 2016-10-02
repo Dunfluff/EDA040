@@ -1,0 +1,43 @@
+package lift;
+
+import se.lth.cs.realtime.semaphore.Semaphore;
+
+public class LiftMonitor {
+	private final static int FLOORS = 7;
+    private int here = 0;
+    private int there = 0;
+    private int load = 0;
+    private int direction = 1;
+    private int[] waitEntry = new int[FLOORS];
+    private int[] waitExit = new int[]{-1, -1, -1, -1};
+    private LiftView liftView;
+
+    public LiftMonitor(LiftView liftView) {
+        this.liftView = liftView;
+    }
+
+    public synchronized int move() {
+    	if(there == FLOORS -1){
+    		direction = -1;
+    	}
+    	if(there == 0){
+    		direction = 1;
+    	}
+		return there + direction;
+    }
+
+    private synchronized int waitSum() {
+		return 0;
+
+    }
+
+    public synchronized int stop() {
+		return 0;
+
+    }
+
+    public synchronized void call(int from, int to) {
+
+    }
+
+}

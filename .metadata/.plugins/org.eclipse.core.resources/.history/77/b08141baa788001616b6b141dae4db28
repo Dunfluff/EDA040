@@ -1,0 +1,40 @@
+package lift;
+
+
+import se.lth.cs.realtime.semaphore.*;
+
+public class LiftMain {
+	
+	LiftMonitor monitor;
+	Semaphore sem;
+	
+	public LiftMain(){
+		sem = new MutexSem();
+	}
+	
+	
+	
+	/**
+	 * Tell threads to terminate and wait until they are dead.
+	 */
+	public void terminate() {
+
+	}
+	
+	/**
+	 * Create thread objects, and start threads
+	 */
+	public void start() {
+		new LiftLift().start();
+		for(int i = 0; i < 20; i++){
+			new LiftPerson(sem).start();
+		}
+	}
+	
+	public static void main(String[] args) {
+		LiftMain main = new LiftMain();
+		LiftView lv = new LiftView();
+		LiftMonitor monitor = new LiftMonitor();
+		//main.start();
+	}
+}

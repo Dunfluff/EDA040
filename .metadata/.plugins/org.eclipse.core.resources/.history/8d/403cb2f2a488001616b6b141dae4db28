@@ -1,0 +1,22 @@
+package lift;
+
+import se.lth.cs.realtime.semaphore.*;
+
+public class LiftPerson extends Thread {
+	int delay = 1000*(( int )( Math.random ()*46.0)); // sleep need milliseconds
+	
+	public LiftPerson(Semaphore sem) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run() {
+		try {
+			Thread.sleep(delay);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}

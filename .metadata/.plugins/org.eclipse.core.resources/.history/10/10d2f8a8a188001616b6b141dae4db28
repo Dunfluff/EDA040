@@ -1,0 +1,39 @@
+package lift;
+
+import todo.BThread;
+import todo.TThreadGo;
+
+public class LiftMain {
+	
+	
+	
+	/**
+	 * Tell threads to terminate and wait until they are dead.
+	 */
+	public void terminate() {
+
+	}
+	
+	/**
+	 * Create thread objects, and start threads
+	 */
+	public void start() {
+		for(int i = 0; )
+	}
+	
+	public static void main(String[] args) {
+		LiftView lv = new LiftView();
+		lv.drawLift(0,3);
+		lv.drawLevel(5,4);
+		try {
+			Thread.sleep(1000);
+		} catch(InterruptedException e) { }
+		lv.moveLift(0,1);
+		lv.drawLift(1,2);
+		lv.moveLift(1,5);
+		lv.drawLevel(5,3);
+		lv.drawLift(5,3);
+		
+		
+	}
+}

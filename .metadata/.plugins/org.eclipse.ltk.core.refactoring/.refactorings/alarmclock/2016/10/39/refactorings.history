@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;TThreadGo.java&apos; to &apos;lift/src/lift&apos;&#x0D;&#x0A;- Original project: &apos;alarmclock&apos;&#x0D;&#x0A;- Destination element: &apos;lift/src/lift&apos;&#x0D;&#x0A;- Original element: &apos;todo.TThreadGo.java&apos;" description="Copy compilation unit" destination="=lift/src&lt;lift" element1="/src&lt;todo{TThreadGo.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1475412978627" units="1" version="1.0"/>
+</session>

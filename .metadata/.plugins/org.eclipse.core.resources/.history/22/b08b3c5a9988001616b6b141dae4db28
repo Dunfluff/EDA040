@@ -1,0 +1,44 @@
+package lift;
+
+public class LiftPerson extends Thread {
+
+	public LiftPerson() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(Runnable target) {
+		super(target);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(String name) {
+		super(name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(ThreadGroup group, Runnable target) {
+		super(group, target);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(ThreadGroup group, String name) {
+		super(group, name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(Runnable target, String name) {
+		super(target, name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(ThreadGroup group, Runnable target, String name) {
+		super(group, target, name);
+		// TODO Auto-generated constructor stub
+	}
+
+	public LiftPerson(ThreadGroup group, Runnable target, String name, long stackSize) {
+		super(group, target, name, stackSize);
+		// TODO Auto-generated constructor stub
+	}
+
+}
