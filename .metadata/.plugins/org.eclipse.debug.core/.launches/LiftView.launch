@@ -8,4 +8,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="lift.LiftView"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="lift"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Dsun.java2d.opengl=true"/>
 </launchConfiguration>

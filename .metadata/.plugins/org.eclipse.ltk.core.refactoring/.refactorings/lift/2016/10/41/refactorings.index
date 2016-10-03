@@ -1,0 +1,4 @@
+1475483570552	Rename method 'call'
+1475483612144	Extract method 'enterLift'
+1475483668490	Extract method 'exitLift'
+1475483912109	Rename method 'liftOperation'

@@ -1,7 +1,5 @@
 package lift;
 
-import se.lth.cs.realtime.semaphore.Semaphore;
-
 public class LiftMonitor {
 	private final static int FLOORS = 7;
 	private int here = 0;
@@ -26,65 +24,58 @@ public class LiftMonitor {
 		return there;
 	}
 
-	private synchronized int waitingList() {
-		int waitList = 0;
-
-		for (int count : waitEntry)
-			waitList += count;
-
-		return waitList;
-
-	}
-
 	public synchronized int stop() {
 		here = there;
 		notifyAll();
-		
 
-		while ((load == 0 && waitingList() == 0) || (waitEntry[here] > 0 && load < 4) || quitters()) {
-			try {
+		try {
+			while ((waitEntry[here] > 0 && load < 4) || quitters()) {
 				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
 		return here;
 	}
 
-	public synchronized void call(int from, int to) {
+	public synchronized void readyForARide(int from, int to) {
 		waitEntry[from]++;
 		liftView.drawLevel(from, waitEntry[from]);
 		notifyAll();
-
-		while(here != there || from != here || load == 4) {
-			try {
+		try {
+			while (here != there || from != here || load == 4) {
 				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
-		
 		int mySpot = nextSpot();
+		enterLift(from, to, mySpot);
+		notifyAll();
+		try {
+			while (here != there || here != to) {
+				wait();
+			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		exitLift(mySpot);
+		notifyAll();
+	}
+
+	private void exitLift(int mySpot) {
+		waitExit[mySpot] = -1;
+		load--;
+		liftView.drawLift(here, load);
+	}
+
+	private void enterLift(int from, int to, int mySpot) {
 		waitExit[mySpot] = to;
 		load++;
 		waitEntry[from]--;
 		liftView.drawLevel(here, waitEntry[from]);
 		liftView.drawLift(here, load);
-		notifyAll();
-
-		while (here != there || here != to) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		waitExit[mySpot] = -1;
-		load--;
-		liftView.drawLift(here, load);
-		notifyAll();
-
 	}
 
 	private boolean quitters() {

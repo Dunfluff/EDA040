@@ -1,9 +1,5 @@
 package lift;
 
-import java.util.Random;
-
-import se.lth.cs.realtime.semaphore.*;
-
 
 public class LiftPerson extends Thread {
 	private LiftMonitor monitor;
@@ -28,7 +24,7 @@ public class LiftPerson extends Thread {
             try { Thread.sleep((int) (46000 * Math.random())); }
             catch (InterruptedException e) { e.printStackTrace(); }
 
-            monitor.call(from, to);
+            monitor.readyForARide(from, to);
         }
     }
 }
