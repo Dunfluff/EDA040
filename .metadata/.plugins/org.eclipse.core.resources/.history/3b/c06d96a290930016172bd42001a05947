@@ -51,13 +51,13 @@ class WashingProgram2 extends WashingProgram {
 	protected void wash() throws InterruptedException {
 		// Lock hatch
 		myMachine.setLock(true);
-
+		
 		preWash();
 		mainWash();
-		for (int i = 0; i < 5; i++) {
+		for(int i = 0; i < 5; i++){
 			rinse();
 		}
-		centrifuge();
+		
 		// Unlock
 		myMachine.setLock(false);
 	}
@@ -83,7 +83,7 @@ class WashingProgram2 extends WashingProgram {
 		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_IDLE, 0));
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0));
 		mailbox.doFetch();
-
+		
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0));
 	}
 
@@ -108,31 +108,23 @@ class WashingProgram2 extends WashingProgram {
 		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_IDLE, 0));
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0));
 		mailbox.doFetch();
-
+		
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0));
 
 	}
-
 	private void rinse() {
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_FILL, 0.8));
-
+		
 		mailbox.doFetch(); // Wait for Ack
 
 		// Set water regulation to idle => drain pump stops
-		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
-
+		myWaterController.putEvent(new WaterEvent(this,
+				WaterEvent.WATER_IDLE,
+				0.0));
+		
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 2 * 1000) / mySpeed);
-		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
-		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
-		mailbox.doFetch();
-		
-		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
-
-	}
-	private void centrifuge(){
-		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
-		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
-		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
+		mySpinController.putEvent(new SpinEvent(this,SpinEvent.SPIN_OFF));
+		myWaterController.putEvent(new WaterEvent(this,WaterEvent.WATER_DRAIN, 0.0));
 	}
 }

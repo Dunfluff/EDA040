@@ -58,6 +58,7 @@ class WashingProgram2 extends WashingProgram {
 			rinse();
 		}
 		centrifuge();
+
 		// Unlock
 		myMachine.setLock(false);
 	}
@@ -134,5 +135,7 @@ class WashingProgram2 extends WashingProgram {
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
+		mailbox.doFetch();
 	}
 }

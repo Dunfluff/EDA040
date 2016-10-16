@@ -58,6 +58,7 @@ class WashingProgram2 extends WashingProgram {
 			rinse();
 		}
 		centrifuge();
+
 		// Unlock
 		myMachine.setLock(false);
 	}

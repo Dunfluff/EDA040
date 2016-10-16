@@ -1,0 +1,33 @@
+package todo;
+
+import done.AbstractWashingMachine;
+
+public class WashingProgram1 extends WashingProgram {
+
+	public WashingProgram1(AbstractWashingMachine mach, double speed, TemperatureController tempController,
+			WaterController waterController, SpinController spinController) {
+		super(mach, speed, tempController, waterController, spinController);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void wash() throws InterruptedException {
+
+		//Lock Hatch
+		
+		//Fill with water
+		
+		//Heat water to 60
+		//&?
+		//Keep for 30 min
+		
+		//drain
+		
+		//rinse 5 times a 2 min
+		
+		//centrifuge 5 min 
+		
+		//unlock
+	}
+
+}
