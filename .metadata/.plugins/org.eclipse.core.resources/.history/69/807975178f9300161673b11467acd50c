@@ -58,7 +58,7 @@ public class WashingProgram1 extends WashingProgram {
 					0.0));
 			
 			mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
-		//SLEEEEEEEP for 2 min
+		//SLEEEEEEEP for 3 min
 			mySpinController.putEvent(new SpinEvent(this,SpinEvent.SPIN_OFF));
 			myWaterController.putEvent(new WaterEvent(this,WaterEvent.WATER_DRAIN, 0.0));
 		}
