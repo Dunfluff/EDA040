@@ -53,7 +53,7 @@ class WashingProgram3 extends WashingProgram {
 
 		// Switch off spin
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
-
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
 		// Drain
 		myWaterController.putEvent(new WaterEvent(this,
 				WaterEvent.WATER_DRAIN,

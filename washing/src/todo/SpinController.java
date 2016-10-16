@@ -36,7 +36,7 @@ public class SpinController extends PeriodicThread {
 				dirTimer = 0;
 				break;
 			case SpinEvent.SPIN_FAST:
-				currentAction = SpinEvent.SPIN_OFF;
+				currentAction = SpinEvent.SPIN_FAST;
 				break;
 			}
 		}

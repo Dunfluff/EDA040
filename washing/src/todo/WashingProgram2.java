@@ -68,7 +68,7 @@ class WashingProgram2 extends WashingProgram {
 		mailbox.doFetch();
 
 		// stop filling set idle set water temp
-		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.8));
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
 		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_SET, 40.0));
 		mailbox.doFetch();
 
@@ -93,7 +93,7 @@ class WashingProgram2 extends WashingProgram {
 		mailbox.doFetch();
 
 		// stop filling set idle set water temp
-		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.8));
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
 		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_SET, 90.0));
 		mailbox.doFetch();
 
@@ -123,6 +123,8 @@ class WashingProgram2 extends WashingProgram {
 
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 2 * 1000) / mySpeed);
+		while(sleepTime > System.currentTimeMillis())
+			sleep(sleepTime - System.currentTimeMillis());
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
 		mailbox.doFetch();
@@ -134,6 +136,8 @@ class WashingProgram2 extends WashingProgram {
 	private void centrifuge() {
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
+		while(sleepTime > System.currentTimeMillis())
+			sleep(sleepTime - System.currentTimeMillis());
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
 	}
 }

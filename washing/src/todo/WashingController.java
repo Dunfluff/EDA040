@@ -37,6 +37,9 @@ public class WashingController implements ButtonListener {
     	
     	if(!currentThread.isAlive()){
     	switch(theButton){
+    	case 0 :
+    		currentThread = new WashingProgram0(theMachine, theSpeed, tc, wc, sc);
+    		break;
     	case 1 :
     		currentThread = new WashingProgram1(theMachine, theSpeed, tc, wc, sc);
     		break;

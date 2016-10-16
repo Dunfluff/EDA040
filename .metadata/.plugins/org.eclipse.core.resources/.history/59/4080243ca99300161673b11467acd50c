@@ -1,0 +1,78 @@
+package todo;
+
+import done.AbstractWashingMachine;
+
+public class WashingProgram1 extends WashingProgram {
+	long sleepTime;
+
+	public WashingProgram1(AbstractWashingMachine mach, double speed, TemperatureController tempController,
+			WaterController waterController, SpinController spinController) {
+		super(mach, speed, tempController, waterController, spinController);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	protected void wash() throws InterruptedException {
+
+		mainWash();
+
+		rinse();
+
+		// Set water regulation to idle => drain pump stops
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
+
+		centrifuge();
+
+		// unlock
+		myMachine.setLock(false);
+	}
+
+	private void centrifuge() throws InterruptedException {
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
+		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
+	}
+
+	private void rinse() throws InterruptedException {
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_FILL, 0.8));
+
+		mailbox.doFetch(); // Wait for Ack
+
+		// Set water regulation to idle => drain pump stops
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
+
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
+		sleepTime = System.currentTimeMillis() + (long) ((60 * 2 * 1000) / mySpeed);
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
+		mailbox.doFetch();
+
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
+	}
+
+	private void mainWash() throws InterruptedException {
+		// fill water
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_FILL, 0.8));
+		mailbox.doFetch();
+
+		// stop filling set idle set water temp
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
+		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_SET, 90.0));
+		mailbox.doFetch();
+
+		// wash for 30 min
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
+		sleepTime = System.currentTimeMillis() + (long) ((60 * 30 * 1000) / mySpeed);
+		while (System.currentTimeMillis() < sleepTime)
+			sleep(sleepTime - System.currentTimeMillis());
+
+		// turn off spinn
+		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
+		myTempController.putEvent(new TemperatureEvent(this, TemperatureEvent.TEMP_IDLE, 0));
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0));
+		mailbox.doFetch();
+
+		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0));
+	}
+
+}

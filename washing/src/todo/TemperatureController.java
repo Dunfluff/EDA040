@@ -13,6 +13,7 @@ public class TemperatureController extends PeriodicThread {
 
 	public TemperatureController(AbstractWashingMachine mach, double speed) {
 		super((long) (1000 / speed)); // TODO: replace with suitable period
+		machine = mach;
 	}
 
 	public void perform() {
@@ -31,7 +32,7 @@ public class TemperatureController extends PeriodicThread {
 			}
 		}
 		if (currentAction == TemperatureEvent.TEMP_SET && machine.getWaterLevel() > 0.1) {
-			if (machine.getTemperature() < 1.9) {
+			if (machine.getTemperature() < targetTemp - 1.9) {
 				machine.setHeating(true);
 			} else if (machine.getTemperature() > targetTemp) {
 				machine.setHeating(false);

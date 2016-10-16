@@ -13,6 +13,7 @@ public class WaterController extends PeriodicThread {
 
 	public WaterController(AbstractWashingMachine mach, double speed) {
 		super((long) (1000 / speed)); // TODO: replace with suitable period
+		machine = mach;
 	}
 
 	public void perform() {
@@ -33,6 +34,7 @@ public class WaterController extends PeriodicThread {
 				machine.setFill(false);
 				machine.setDrain(true);
 				wp = ((WashingProgram) currentEvent.getSource());
+				break;
 			case WaterEvent.WATER_FILL:
 				currentAction = WaterEvent.WATER_FILL;
 				targetLevel = ((WaterEvent) currentEvent).getLevel();
@@ -43,12 +45,13 @@ public class WaterController extends PeriodicThread {
 				} else {
 					System.err.println("Fill water command failed. Machine not locked.");
 				}
+				break;
 			}
-			if (wp != null && ((currentAction == WaterEvent.WATER_FILL && machine.getWaterLevel() >= targetLevel)
-					|| (currentAction == WaterEvent.WATER_DRAIN && machine.getWaterLevel() <= targetLevel))) {
-				wp.putEvent(new AckEvent(this));
-				wp = null;
 			}
+		if (wp != null && ((currentAction == WaterEvent.WATER_FILL && machine.getWaterLevel() >= targetLevel)
+				|| (currentAction == WaterEvent.WATER_DRAIN && machine.getWaterLevel() <= targetLevel))) {
+			wp.putEvent(new AckEvent(this));
+			wp = null;
 		}
 	}
 }
