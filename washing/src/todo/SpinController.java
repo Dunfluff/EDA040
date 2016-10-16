@@ -30,7 +30,6 @@ public class SpinController extends PeriodicThread {
 				break;
 			case SpinEvent.SPIN_SLOW:
 				currentAction = SpinEvent.SPIN_SLOW;
-				spinDir = (spinDir == AbstractWashingMachine.SPIN_LEFT) ? AbstractWashingMachine.SPIN_RIGHT : AbstractWashingMachine.SPIN_LEFT;
 				machine.setSpin(spinDir);
 				lastUse = System.currentTimeMillis();
 				dirTimer = 0;

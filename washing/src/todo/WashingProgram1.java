@@ -30,6 +30,8 @@ public class WashingProgram1 extends WashingProgram {
 	private void centrifuge() throws InterruptedException {
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
+		while (System.currentTimeMillis() < sleepTime)
+			sleep(sleepTime - System.currentTimeMillis());
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
 	}
 
@@ -43,6 +45,8 @@ public class WashingProgram1 extends WashingProgram {
 
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_SLOW));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 2 * 1000) / mySpeed);
+		while (System.currentTimeMillis() < sleepTime)
+			sleep(sleepTime - System.currentTimeMillis());
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
 		mailbox.doFetch();
