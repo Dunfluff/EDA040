@@ -1,2 +1,8 @@
 1476611514461	Rename compilation unit 'WasingProgram0.java'
+<<<<<<< Updated upstream
 1476613388686	Copy compilation unit
+=======
+1476616164837	Extract method 'mainWash'
+1476616183338	Extract method 'rinse'
+1476616211926	Extract method 'centrifuge'
+>>>>>>> Stashed changes
