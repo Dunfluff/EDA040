@@ -3,20 +3,17 @@ package todo;
 import done.AbstractWashingMachine;
 
 public class WashingProgram0 extends WashingProgram {
-	
-	public WashingProgram0(AbstractWashingMachine mach,
-			double speed,
-			TemperatureController tempController,
-			WaterController waterController,
-			SpinController spinController) {
+
+	public WashingProgram0(AbstractWashingMachine mach, double speed, TemperatureController tempController,
+			WaterController waterController, SpinController spinController) {
 		super(mach, speed, tempController, waterController, spinController);
 	}
 
-
 	@Override
 	protected void wash() throws InterruptedException {
-		// TODO Auto-generated method stub
-
+		myWaterController.putEvent((new WaterEvent(this, WaterEvent.WATER_IDLE, 0)));
+		myWaterController.putEvent((new TemperatureEvent(this, TemperatureEvent.TEMP_IDLE, 0)));
+		myWaterController.putEvent((new SpinEvent(this, SpinEvent.SPIN_OFF)));
 	}
 
 }

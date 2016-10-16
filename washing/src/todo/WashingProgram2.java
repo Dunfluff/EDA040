@@ -1,10 +1,10 @@
 /*
- * Real-time and concurrent programming course, laboratory 3
- * Department of Computer Science, Lund Institute of Technology
- *
- * PP 980812 Created
- * PP 990924 Revised
- */
+* Real-time and concurrent programming course, laboratory 3
+* Department of Computer Science, Lund Institute of Technology
+*
+* PP 980812 Created
+* PP 990924 Revised
+*/
 
 package todo;
 
@@ -126,11 +126,12 @@ class WashingProgram2 extends WashingProgram {
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_DRAIN, 0.0));
 		mailbox.doFetch();
-		
+
 		myWaterController.putEvent(new WaterEvent(this, WaterEvent.WATER_IDLE, 0.0));
 
 	}
-	private void centrifuge(){
+
+	private void centrifuge() {
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_FAST));
 		sleepTime = System.currentTimeMillis() + (long) ((60 * 5 * 1000) / mySpeed);
 		mySpinController.putEvent(new SpinEvent(this, SpinEvent.SPIN_OFF));

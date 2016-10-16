@@ -1,0 +1,27 @@
+package todo;
+
+import se.lth.cs.realtime.*;
+import done.AbstractWashingMachine;
+import se.lth.cs.realtime.event.*;
+
+public class SpinController extends PeriodicThread {
+	// TODO: add suitable attributes
+	private RTEvent placeholder;
+	private AbstractWashingMachine machine;
+
+	public SpinController(AbstractWashingMachine mach, double speed) {
+		super((long) (1000 / speed)); // TODO: replace with suitable period
+		machine = mach;
+	}
+
+	public void perform() {
+		switch (((SpinEvent) placeholder).getMode()){
+		case 0:
+			machine.setSpin(AbstractWashingMachine.SPIN_OFF);
+			break;
+		case 1:
+			machine.setSpin(AbstractWashingMachine.SPIN_LEFT);
+			machine.setSpin(AbstractWashingMachine.SPIN_LEFT);
+		}
+	}
+}
