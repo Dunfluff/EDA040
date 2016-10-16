@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;todo.WasingProgram0.java&apos; to &apos;WashingProgram0.java&apos;&#x0D;&#x0A;- Original project: &apos;washing&apos;&#x0D;&#x0A;- Original element: &apos;todo.WasingProgram0.java&apos;&#x0D;&#x0A;- Renamed element: &apos;todo.WashingProgram0.java&apos;" description="Rename compilation unit &apos;WasingProgram0.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src&lt;todo{WasingProgram0.java" name="WashingProgram0.java" references="false" stamp="1476611514461" version="1.0"/>
+</session>
